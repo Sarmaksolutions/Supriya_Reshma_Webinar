@@ -12,9 +12,8 @@
     <title>SARMAK | Worried to Hired Workshop</title>
 
 
-    <!-- Flask CSS -->
     <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
+          href="./style.css">
 
 
     <!-- International Phone Input CSS -->
@@ -36,7 +35,7 @@
         <div class="brand">
 
             <img
-                src="{{ url_for('static', filename='logo.png') }}"
+                src="./logo.png"
                 alt="SARMAK Logo"
                 class="logo"
             >
@@ -291,7 +290,7 @@
             <div class="poster-card">
 
                 <img
-                    src="{{ url_for('static', filename='poster.jpg') }}"
+                    src="./poster.jpg"
                     alt="AI Automation Workshop Poster"
                     class="poster"
                 >
@@ -759,12 +758,15 @@ document.addEventListener(
 
 
                 /* ==================================
-                   CREATE FORM DATA
+                   CREATE JSON PAYLOAD
                 ================================== */
 
-                const formData =
-                    new FormData(form);
-
+                const payload = {
+                    name: document.getElementById("name").value.trim(),
+                    email: document.getElementById("email").value.trim(),
+                    phone: document.getElementById("full_phone").value.trim(),
+                    country_code: document.getElementById("country_code").value.trim()
+                };
 
 
                 /* ==================================
@@ -791,13 +793,11 @@ document.addEventListener(
                         await fetch(
                             "/create-order",
                             {
-
-                                method:
-                                    "POST",
-
-                                body:
-                                    formData
-
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify(payload)
                             }
                         );
 

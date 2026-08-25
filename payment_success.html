@@ -217,6 +217,18 @@
             color: #d4af37;
         }
 
+        .order-id {
+            display: inline-block;
+            margin: 0 0 20px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: #d9d9d9;
+            background: rgba(212, 175, 55, 0.06);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 999px;
+            padding: 8px 12px;
+        }
+
 
         /* HOME BUTTON */
 
@@ -334,7 +346,7 @@
 
     <!-- BRAND -->
      <img
-    src="{{ url_for('static', filename='logo.png') }}"
+    src="./logo.png"
     alt="SARMAK Logo"
     class="success-logo"
 >
@@ -376,6 +388,8 @@
     </p>
 
 
+    <div id="order-id" class="order-id"></div>
+
     <!-- PAYMENT AMOUNT -->
 
     <div class="amount-box">
@@ -394,7 +408,7 @@
     <!-- HOME BUTTON -->
 
     <a
-        href="https://learn.sarmak.in/"
+        href="./index.html"
         class="home-button">
 
         Back to Home
@@ -419,6 +433,14 @@
 
 </div>
 
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const orderId = params.get("order_id");
+    const orderEl = document.getElementById("order-id");
+    if (orderEl) {
+        orderEl.textContent = orderId ? `Order ID: ${orderId}` : "Order ID: N/A";
+    }
+</script>
 
 </body>
 

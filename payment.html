@@ -195,7 +195,7 @@
 
 
     <img
-        src="{{ url_for('static', filename='logo.png') }}"
+        src="./logo.png"
         alt="SARMAK Logo"
         class="logo"
     >
@@ -216,37 +216,10 @@
     </div>
 
 
-    <div class="customer-info">
-
-        {% if name %}
-
-        <div>
-            <strong>Name:</strong>
-            {{ name }}
-        </div>
-
-        {% endif %}
-
-
-        {% if email %}
-
-        <div>
-            <strong>Email:</strong>
-            {{ email }}
-        </div>
-
-        {% endif %}
-
-
-        {% if phone %}
-
-        <div>
-            <strong>WhatsApp:</strong>
-            {{ phone }}
-        </div>
-
-        {% endif %}
-
+    <div class="customer-info" id="customer-info">
+        <div><strong>Name:</strong> Workshop Registrant</div>
+        <div><strong>Email:</strong> registration@example.com</div>
+        <div><strong>WhatsApp:</strong> +91 00000 00000</div>
     </div>
 
 
@@ -281,8 +254,8 @@ document.addEventListener(
     function () {
 
 
-        const paymentSessionId =
-            "{{ payment_session_id }}";
+        const params = new URLSearchParams(window.location.search);
+        const paymentSessionId = params.get("payment_session_id") || "";
 
 
         const payButton =
@@ -310,10 +283,7 @@ document.addEventListener(
 
         const cashfree =
             Cashfree({
-
-                mode:
-                    "{{ mode or 'sandbox' }}"
-
+                mode: "sandbox"
             });
 
 
